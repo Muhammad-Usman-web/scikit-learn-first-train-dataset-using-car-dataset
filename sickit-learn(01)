@@ -1,0 +1,6 @@
+from sklearn import datasets
+import pandas as pd
+x,y=datasets.load_iris(return_X_y=True)
+#print (x,y)
+df=pd.DataFrame(x,y)
+print(df.head)
