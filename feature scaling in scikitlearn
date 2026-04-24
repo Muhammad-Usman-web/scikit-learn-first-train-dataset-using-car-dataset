@@ -1,0 +1,43 @@
+# Import pandas to create and handle the data table (DataFrame)
+import pandas as pd
+
+# Import matplotlib's pyplot for making graphs
+import matplotlib.pyplot as plt
+
+# Create a dictionary where each key is a column name, and the value is a list of values for that column
+data = {
+    "Brand": ["Toyota", "Honda", "Suzuki", "Hyundai", "Kia", "Toyota", "Honda", "Suzuki", "Nissan", "Ford"],
+    "Model": ["Corolla", "Civic", "Alto", "Elantra", "Sportage", "Yaris", "City", "Swift", "Sunny", "Focus"],
+    "Driven_km": [50000, 40000, 30000, 45000, 35000, 55000, 60000, 48000, 52000, 47000],
+    "Engine_cc": [1300, 1500, 660, 1600, 2000, 1300, 1500, 1300, 1500, 1600],
+    "Transmission": ["Manual", "Automatic", "Manual", "Automatic", "Automatic", "Manual", "Automatic", "Manual", "Automatic", "Manual"],
+    "Sell_Price": [14000, 17000, 7500, 16000, 24000, 13000, 15000, 11000, 12000, 14500]
+}
+
+# Convert the dictionary into a pandas DataFrame (a 2D table with rows and columns)
+df = pd.DataFrame(data)
+
+# (Optional) Print the whole table to see the data; uncomment if needed
+# print(df)
+
+# Create a line plot:
+#   x-axis = Driven_km column (numeric, distance driven)
+#   y-axis = Sell_Price column (numeric, car price)
+#   '-' means draw a solid line connecting the points in the order they appear
+#   'o' would draw only dots; 'o-' would draw dots with line; here we use '-'
+plt.plot(df["Driven_km"], df["Sell_Price"], '-')
+
+# Set the label on the horizontal (x) axis
+plt.xlabel("Driven Kilometers")
+
+# Set the label on the vertical (y) axis
+plt.ylabel("Selling Price (USD)")
+
+# Give the graph a title at the top
+plt.title("Car Price vs Driven Kilometers")
+
+# Show a light grid behind the plot to make values easier to read
+plt.grid(True)
+
+# Display the plot on the screen
+plt.show()
