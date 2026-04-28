@@ -1,0 +1,14 @@
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+
+df = pd.read_csv("car data.txt")
+
+df= df[["Company","Model","Transmission","Fuel_Type"]]
+
+ohe = OneHotEncoder(drop="first",dtype=int,sparse_output=False)
+ohe_trans = ohe.fit_transform(df)
+
+columns = ohe.get_feature_names_out(["Company","Model","Transmission","Fuel_Type"])
+
+ohe_trans=pd.DataFrame(data=ohe_trans,columns=columns)
+print (ohe_trans)
