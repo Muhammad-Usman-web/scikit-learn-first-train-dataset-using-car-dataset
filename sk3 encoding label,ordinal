@@ -1,0 +1,51 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder, OrdinalEncoder
+from sklearn.model_selection import train_test_split
+
+# load data
+df = pd.read_csv("car data.txt")
+df = df[["Company","Model","Transmission","Fuel_Type"]]
+
+# split X and y
+X = df.drop("Fuel_Type", axis=1)
+y = df["Fuel_Type"]
+
+# train-test split
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=20)
+
+# =======================
+# Label Encoding (target-output)
+# =======================
+
+label = LabelEncoder()
+
+y_train_en = label.fit_transform(y_train)
+y_test_en  = label.transform(y_test)
+
+# convert to DataFrame
+y_train_en = pd.DataFrame(y_train_en, columns=["Fuel_Type"], index=y_train.index)
+y_test_en  = pd.DataFrame(y_test_en, columns=["Fuel_Type"], index=y_test.index)
+
+# ==========================
+# Ordinal Encoding (features)
+# ==========================
+ordinal = OrdinalEncoder()
+
+x_train_or = ordinal.fit_transform(x_train)
+x_test_or  = ordinal.transform(x_test)
+
+# convert to DataFrame
+x_train_or = pd.DataFrame(x_train_or, columns=X.columns, index=x_train.index)
+x_test_or  = pd.DataFrame(x_test_or, columns=X.columns, index=x_test.index)
+
+# =======================
+# (Optional) Combine back
+# =======================
+x_all = pd.concat([x_train_or, x_test_or])
+y_all = pd.concat([y_train_en, y_test_en])
+
+# =======================
+# Output
+# =======================
+#print (x_all.head())
+print(y_all.head())
